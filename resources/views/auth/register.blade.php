@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-default">
-          <div class="panel-heading">会員登録</div>
+          <div class="panel-heading">選手登録</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -26,19 +26,19 @@
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" />
               </div>
               <div class="form-group">
-                <label class="control-label" for="sex">性別</label>
-                <div class="custom-control custom-radio">
-                  <input type="checkbox" class="custom-control-input" id="custom-radio-1">
-                  <label class="custom-control-label" for="custom-radio-1">男性</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input type="checkbox" class="custom-control-input" id="custom-radio-2">
-                  <label class="custom-control-label" for="custom-radio-2">女性</label>
-                </div>
+                <label class="control-label">性別</label>
+                    <div class="form-check">
+                      <input type="radio" value="male" class="custom-check-input" id="male" name="sex">
+                      <label class="custom-check-label" for="male">男性</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" value="female" class="custom-check-input" id="female" name="sex">
+                      <label class="custom-check-label" for="female">女性</label>
+                    </div>
               </div>
               <div class="form-group">
                 <label for="age">年齢</label>
-                <select class="custom-select custom-select-lg">
+                <select class="form-control" id="age" name="age">
                   <option selected>選択してください</option>
                   @for ($i=6; $i<=100; $i++)
                     <option value="{{$i}}">{{$i}}</option>

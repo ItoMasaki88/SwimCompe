@@ -2,7 +2,19 @@
 
 @section('content')
   <div class="container">
-    <h2>マイページ</h2>
+    <h2>{{Auth::user()->name}}さんのマイページ</h2>
+    <table>
+      <tr>
+        <td>性別</td>
+        <td>:</td>
+        <td>{{Auth::user()->sex}}</td>
+      </tr>
+      <tr>
+        <td>年齢</td>
+        <td>:</td>
+        <td>{{Auth::user()->age}}</td>
+      </tr>
+    </table>
     <h3>エントリー種目</h3>
     <table class="table table-light">
       <tr>
@@ -15,7 +27,6 @@
       </tr>
       @foreach($events as $event)
       <tr>
-        <!-- <td>{{$entry->user_id}}</td> -->
         <td>{{$event->id}}</td>
         <td>{{$event->event_name}}</td>
         <td>{{$event->sex}}</td>

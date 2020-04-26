@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'sex', 'age'
     ];
 
     /**
@@ -32,5 +32,27 @@ class User extends Authenticatable
     public function entries()
     {
       return $this->hasMany('App\Entry');
+    }
+
+    /**
+     * Get 性別
+     *
+     * @param
+     * @return string
+    **/
+    public function getSexAttribute()
+    {
+      return $this->attributes['sex'];
+    }
+
+    /**
+     * Get 年齢
+     *
+     * @param
+     * @return string
+    **/
+    public function getAgeAttribute()
+    {
+      return $this->attributes['age'];
     }
 }

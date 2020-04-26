@@ -25,11 +25,12 @@ class ShowMypage extends Controller
    */
   public function __invoke()
   {
-    $entries = Auth::user()->entries();
+    $entries = Auth::user()->entries;
+    eval(\Psy\sh());
 
     $events = array();
     foreach ($entries as $entry) {
-      array_push($events, $entry->race()->event());
+      array_push($events, $entry->race->event);
     }
     return view('app/mypage', ['events' => $events]);
   }
