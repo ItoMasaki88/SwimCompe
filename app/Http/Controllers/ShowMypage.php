@@ -26,7 +26,6 @@ class ShowMypage extends Controller
   public function __invoke()
   {
     $entries = Auth::user()->entries;
-    eval(\Psy\sh());
 
     $events = array();
     foreach ($entries as $entry) {

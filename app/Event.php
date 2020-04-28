@@ -47,6 +47,18 @@ class Event extends Model
    ];
 
    /**
+    * Get ID
+    *
+    * @param
+    * @return int
+   **/
+   public function getIdAttribute()
+   {
+     return $this->attributes['id'];
+   }
+
+
+   /**
     * Get 泳法
     *
     * @return string
@@ -100,6 +112,16 @@ class Event extends Model
 
      return self::SEX[$i];
    }
+   /**
+    * Get 対象性別
+    *
+    * @param
+    * @return int
+   **/
+   public function getIntSexAttribute()
+   {
+     return $this->attributes['qualifyingSex'];
+   }
 
    /**
     * Get 対象年齢区分
@@ -119,6 +141,17 @@ class Event extends Model
 
      return self::AGE[$i]['label'];
    }
+   /**
+    * Get 対象性別
+    *
+    * @param
+    * @return int
+   **/
+   public function getIntAgeAttribute()
+   {
+     return $this->attributes['qualifyingAge'];
+   }
+
 
    /**
     * Get 対象年齢区分

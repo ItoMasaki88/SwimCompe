@@ -7,7 +7,7 @@
       <tr>
         <td>性別</td>
         <td>:</td>
-        <td>{{Auth::user()->sex}}</td>
+        <td>{{Auth::user()->text_sex}}</td>
       </tr>
       <tr>
         <td>年齢</td>

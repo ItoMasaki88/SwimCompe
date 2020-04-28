@@ -8,14 +8,44 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowEventsList extends Controller
 {
-    // protected $Domain;
-    // protected $Responder;
-    //
-    // public function __construct(Domain $Domain, Responder $Responder)
-    // {
-    //     $this->Domain     = $Domain;
-    //     $this->Responder  = $Responder;
-    // }
+    /** エントリー可能であるかの判定
+    *
+    * @param
+    * @return int
+    */
+     // UserデータがEventの設定クラスに一致すればTrue
+     protected function entryStatus(Event $a_event, $user)
+     {
+       $ageFlag = 0;
+       $sexFlag = 0;
+
+       $ageClass = $user->ageClassify();
+       $sexClass = $user->sexClassify();
+       $entriedEventsID = array();
+       foreach ($user->entries as $entry) {
+         array_push($entriedEventsID, $entry->race->event_id);
+       }
+
+
+       if (in_array($a_event->id, $entriedEventsID)) {
+         return 2;
+       }
+
+       $qAge = $a_event->int_age;
+       $qSex = $a_event->int_sex;
+       foreach ($ageClass as $userValue)
+       {
+         if ($userValue == $qAge) $ageFlag = 1;
+       }
+       foreach ($sexClass as $userValue)
+       {
+         if ($userValue == $qSex) $sexFlag = 1;
+       }
+       return $ageFlag * $sexFlag;
+
+     }
+
+
 
     /**
      * 指定ユーザーのプロフィール表示
@@ -26,6 +56,26 @@ class ShowEventsList extends Controller
     public function __invoke()
     {
       $events = Event::all();
-      return view('app/entry', ['events' => $events]);
+
+      $eventsAndStatuses = array();
+      if (\Auth::check()) {
+        $user = \Auth::user();
+
+        foreach ($events as $event) {
+          array_push($eventsAndStatuses, [
+            'event' => $event,
+            'status' => $this->entryStatus($event, $user),
+          ]);
+        }
+        return view('app/entry', ['eventsAndStatuses' => $eventsAndStatuses,]);
+      }
+
+      foreach ($events as $event) {
+        array_push($eventsAndStatuses, [
+          'event' => $event,
+          'status' => '',
+        ]);
+      }
+      return view('app/entry', ['eventsAndStatuses' => $eventsAndStatuses,]);
     }
 }
