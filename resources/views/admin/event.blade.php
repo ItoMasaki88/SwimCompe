@@ -18,7 +18,7 @@
               <!-- @csrf -->
               {{ csrf_field() }}
               <div class="form-group">
-                <label for="age">泳法</label>
+                <label for="style">泳法</label>
                 <select class="form-control" id="age" name="age">
                   <option selected>選択してください</option>
                   <option value="1">自由形</option>
@@ -26,6 +26,18 @@
                   <option value="3">背泳ぎ</option>
                   <option value="4">バタフライ</option>
                   <option value="5">メドレー</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="age">年齢区分</label>
+                <select class="form-control" id="age" name="age">
+                  <option selected>選択してください</option>
+                  <option value="1">小学生</option>
+                  <option value="2">中学生</option>
+                  <option value="3">高校生</option>
+                  <option value="4">成人</option>
+                  <option value="5">ミドル</option>
+                  <option value="6">マスター</option>
                 </select>
               </div>
               <div class="form-group">
