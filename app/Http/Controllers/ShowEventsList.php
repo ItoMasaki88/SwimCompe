@@ -10,36 +10,38 @@ class ShowEventsList extends Controller
 {
     /** エントリー可能であるかの判定
     *
-    * @param
+    * @param Various
     * @return int
     */
      // UserデータがEventの設定クラスに一致すればTrue
-     protected function entryStatus(Event $a_event, $user)
-     {
+     protected function entryStatus(
+       $entries, // Eloquent\Collection(Entry)
+       int $eventId,
+       array $ageClass,
+       array $sexClass,
+       int $eventAge,
+       int $eventSex
+     ) {
        $ageFlag = 0;
        $sexFlag = 0;
 
-       $ageClass = $user->ageClassify();
-       $sexClass = $user->sexClassify();
        $entriedEventsID = array();
-       foreach ($user->entries as $entry) {
+       foreach ($entries as $entry) {
          array_push($entriedEventsID, $entry->race->event_id);
        }
 
 
-       if (in_array($a_event->id, $entriedEventsID)) {
+       if (in_array($eventId, $entriedEventsID)) {
          return 2;
        }
 
-       $qAge = $a_event->int_age;
-       $qSex = $a_event->int_sex;
        foreach ($ageClass as $userValue)
        {
-         if ($userValue == $qAge) $ageFlag = 1;
+         if ($userValue == $eventAge) $ageFlag = 1;
        }
        foreach ($sexClass as $userValue)
        {
-         if ($userValue == $qSex) $sexFlag = 1;
+         if ($userValue == $eventSex) $sexFlag = 1;
        }
        return $ageFlag * $sexFlag;
 
@@ -60,11 +62,18 @@ class ShowEventsList extends Controller
       $eventsAndStatuses = array();
       if (\Auth::check()) {
         $user = \Auth::user();
+        $ageClass = $user->ageClassify();
+        $sexClass = $user->sexClassify();
+        $entries = $user->entries;
 
         foreach ($events as $event) {
+          $eventAge = $event->int_age;
+          $eventSex = $event->int_sex;
+          $eventId = $event->id;
           array_push($eventsAndStatuses, [
             'event' => $event,
-            'status' => $this->entryStatus($event, $user),
+            'status' => $this->entryStatus(
+              $entries, $eventId, $ageClass, $sexClass, $eventAge, $eventSex),
           ]);
         }
         return view('app/entry', ['eventsAndStatuses' => $eventsAndStatuses,]);

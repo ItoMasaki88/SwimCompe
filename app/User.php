@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    protected $guarded =array('id');
+    public $guarded =array('id');
 
     use Notifiable;
 
@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    public $fillable = [
         'name', 'email', 'password', 'sex', 'age'
     ];
 

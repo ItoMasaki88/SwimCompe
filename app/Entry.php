@@ -32,11 +32,49 @@ class Entry extends Model
   */
    public function player()
    {
-       return $this->belongsTo('App\User');
+      return $this->belongsTo('App\User');
    }
   /*
   *=========リレーション処理ここまで==========================
    */
+
+
+   /**
+    * Attribute 取得=============================================================
+    *
+   **/
+   /**
+    * Get record time
+    *
+    * @param
+    * @return int
+   **/
+   public function getRecordTimeAttribute()
+   {
+     if (!is_null($this->attributes['recordTime'])) {
+       return $this->attributes['recordTime'];
+     }
+     return '--';
+   }
+   /**
+    * Get rank
+    *
+    * @param
+    * @return int
+   **/
+   public function getRankAttribute()
+   {
+     if (!is_null($this->attributes['rank'])) {
+       return $this->attributes['rank'];
+     }
+     return '--';
+   }
+   /**
+    * Attribute 取得　ここまで=============================================================
+    *
+   **/
+
+
 
 
    /**=======バリデーション関連=====================================================**/

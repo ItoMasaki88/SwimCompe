@@ -30,7 +30,7 @@
             エントリーする
           </div>
           @elseif ($eventAndStatus['status']==2)
-          <div class="btn btn-warninng" disabled>
+          <div class="btn btn-warning" disabled>
             エントリー済
           </div>
           @elseif ($eventAndStatus['status']==0)

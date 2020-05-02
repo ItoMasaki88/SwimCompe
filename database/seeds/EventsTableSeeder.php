@@ -13,23 +13,22 @@ class EventsTableSeeder extends Seeder
      */
     public function run()
     {
+      $raceCounts = [2, 2, 1, 3, 2, 2,];
 
-      for ($i=1; $i<=5; $i++) {
-        for ($j=1; $j<=3; $j++) {
-          for ($k=1; $k<=2; $k++) {
-            for ($l=1; $l<=6; $l++) {
-              DB::table('events')->insert([
-                'swimStyle' => $i,
-                'distance' => $j,
-                'qualifyingSex' => $k,
-                'qualifyingAge' => $l,
-                'playerType' => True,
-                'persons' => 20,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-              ]);
-            }
-          }
+      for ($sex=1; $sex<=2; $sex++) {
+        $age =1;
+        foreach ($raceCounts as $raceCount) {
+          DB::table('events')->insert([
+            'swimStyle' => rand(1,5),
+            'distance' => rand(1,3),
+            'qualifyingSex' => $sex,
+            'qualifyingAge' => $age,
+            'playerType' => True,
+            'players' => $raceCount * 5,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+          ]);
+          $age++;
         }
       }
 

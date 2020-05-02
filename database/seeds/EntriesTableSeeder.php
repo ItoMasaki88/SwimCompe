@@ -14,18 +14,28 @@ class EntriesTableSeeder extends Seeder
      */
     public function run()
     {
-      $user = DB::table('users')->first(); // ★
       $now = Carbon::now();
 
-      for ($i=1; $i<=5; $i++) {
-        $event = DB::table('races')->first(); // ★
-        // code...
-        DB::table('entries')->insert([
-          'user_id' => $user->id, // ★
-          'race_id' => Race::find(($i-1)*12 + 4)->id, // ★
-          'created_at' => $now,
-          'updated_at' => $now,
-        ]);
+      $ageCounts = [7, 8, 3, 13, 10, 9,];
+
+      $userId =2;
+      $raceId =0;
+      for ($sex=1; $sex<=2 ; $sex++) {
+        foreach ($ageCounts as $ageCount) {
+          for ($playerCount=0; $playerCount < $ageCount; $playerCount++) {
+            if ($playerCount % 5 === 0) $raceId++;
+
+            DB::table('entries')->insert([
+              'user_id' => $userId,
+              'race_id' => $raceId,
+              'created_at' => $now,
+              'updated_at' => $now,
+            ]);
+
+            $userId++;
+          }
+        }
       }
+
     }
 }

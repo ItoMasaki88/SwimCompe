@@ -8,15 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowMypage extends Controller
 {
-  // protected $Domain;
-  // protected $Responder;
-  //
-  // public function __construct(Domain $Domain, Responder $Responder)
-  // {
-  //     $this->Domain     = $Domain;
-  //     $this->Responder  = $Responder;
-  // }
-
   /**
    * 指定ユーザーのプロフィール表示
    *

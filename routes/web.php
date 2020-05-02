@@ -21,8 +21,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/users', function () { return view('admin.users', ['users'=> App\User::all()]); });
   Route::get('/event', function () { return view('admin.event'); });
   /** Route::get('/race', function () { return view('admin.race'); });
-  * Route::get('/all', function () { return view('admin.all'); });
    **/
+  Route::get('/all', 'ShowAll');
 });
 
 Auth::routes();

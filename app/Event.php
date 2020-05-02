@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-  protected $guarded =array('id');
+  protected $guarded = array('id');
 
   /**
-   * 状態定義
+   * 状態定義==========================================================
    * [
    * 泳法,
    * 距離,
@@ -45,7 +45,28 @@ class Event extends Model
        5 => ['label' => 'ミドル', 'division' => '30~才',],
        6 => ['label' => 'マスター', 'division' => '50~才',],
    ];
+   /**
+    * 状態定義 ここまで==================================================
+    **/
 
+
+   /**
+    * リレーション処理=============================================================
+   **/
+   public function races()
+   {
+       return $this->hasMany('App\Race');
+   }
+
+   /**
+    * リレーション処理　ここまで=============================================================
+   **/
+
+
+   /**
+    * Attribute 取得=============================================================
+    *
+   **/
    /**
     * Get ID
     *
@@ -197,5 +218,9 @@ class Event extends Model
             .$this->getDistanceAttribute().' '
             .$this->getSwimTypeAttribute();
    }
+   /**
+    * Attribute 取得　ここまで=============================================================
+    *
+   **/
 
 }

@@ -17,8 +17,6 @@ class CreateRacesTable extends Migration
           $table->increments('id');
           $table->integer('event_id')->unsigned();
           $table->timestamp('startTime');
-          $table->string('name');
-          $table->integer('players');
           $table->timestamps();
 
           // 外部キーを設定する

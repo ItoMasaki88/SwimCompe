@@ -16,16 +16,22 @@ class RacesTableSeeder extends Seeder
     {
       // タイムスタンプを取得
       $firstTime = Carbon::parse('2020-08-10 09:08:50');
+      $eventId =1;
 
-      for ($i=1; $i<=53; $i++) {
-        DB::table('races')->insert([
-          'event_id' => Event::find(ceil($i/5))->id, // ★ceil($i/5),
-          'startTime' => $firstTime->addSecond(600),
-          'name' => 'race'. (string) $i,
-          'players' => 5,
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now(),
-        ]);
+      $raceCounts = [2, 2, 1, 3, 2, 2,];
+
+      for ($i=0; $i<2; $i++) {
+        foreach ($raceCounts as $raceCount) {
+          for ($k=1; $k<=$raceCount; $k++) {
+            DB::table('races')->insert([
+              'event_id' => $eventId,
+              'startTime' => $firstTime->addSecond(600),
+              'created_at' => Carbon::now(),
+              'updated_at' => Carbon::now(),
+            ]);
+          }
+          $eventId++;
+        }
       }
 
     }

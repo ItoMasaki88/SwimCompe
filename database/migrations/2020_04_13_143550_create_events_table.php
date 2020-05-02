@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
           $table->integer('qualifyingSex'); //male female (mix)
           $table->integer('qualifyingAge'); //elemaentary jouniorhigh high adult over30 over50
           $table->boolean('playerType');    //individual group
-          $table->integer('persons');
+          $table->integer('players');
           $table->timestamps();
         });
     }
