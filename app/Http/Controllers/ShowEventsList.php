@@ -14,7 +14,7 @@ class ShowEventsList extends Controller
     * @return int
     */
      // UserデータがEventの設定クラスに一致すればTrue
-     protected function entryStatus(
+     public function entryStatus(
        $entries, // Eloquent\Collection(Entry)
        int $eventId,
        array $ageClass,

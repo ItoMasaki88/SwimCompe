@@ -18,10 +18,11 @@ Route::get('/entry', 'ShowEventsList');
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', 'ShowMypage');
+  Route::post('/submitEntry', 'SubmitEntryAction')->name('submitEntry');
+  Route::post('/deleteEntry', 'DeleteEntryAction')->name('deleteEntry');
+
   Route::get('/users', function () { return view('admin.users', ['users'=> App\User::all()]); });
   Route::get('/event', function () { return view('admin.event'); });
-  /** Route::get('/race', function () { return view('admin.race'); });
-   **/
   Route::get('/all', 'ShowAll');
 });
 

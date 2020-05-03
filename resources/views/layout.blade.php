@@ -12,7 +12,14 @@
 <header>
   <nav class="my-navbar">
     <a class="my-navbar-brand" href="/">Swiming Competition App</a>
-    <a class="my-navbar-brand" href="/entry">種目一覧（エントリー）</a>
+    <ul class="nav navbar-nav">
+      <li><a class="my-navbar-item" href="/entry">種目一覧（エントリー）</a></li>
+      @if(Auth::user()->admin == 1)
+      <li><a class="my-navbar-item" href="/all">全データ</a></li>
+      <li><a class="my-navbar-item" href="/event">種目登録</a></li>
+      @endif
+    </ul>
+
     <div class="my-navbar-control">
       @if(Auth::check())
         <span class="my-navbar-item">

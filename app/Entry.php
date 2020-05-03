@@ -70,6 +70,16 @@ class Entry extends Model
      return '--';
    }
    /**
+    * Get ID
+    *
+    * @param
+    * @return int
+   **/
+   public function getIdAttribute()
+   {
+     return $this->attributes['id'];
+   }
+   /**
     * Attribute 取得　ここまで=============================================================
     *
    **/

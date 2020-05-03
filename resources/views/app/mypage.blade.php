@@ -16,25 +16,36 @@
       </tr>
     </table>
     <h3>エントリー種目</h3>
-    <table class="table table-light">
-      <tr>
-        <th>ID</th>
-        <th>種目名</th>
-        <th>性別</th>
-        <th>年齢区分</th>
-        <th>出場形態</th>
-        <th></th>
-      </tr>
-      @foreach($events as $event)
-      <tr>
-        <td>{{$event->id}}</td>
-        <td>{{$event->event_name}}</td>
-        <td>{{$event->sex}}</td>
-        <td>{{$event->age_division}}</td>
-        <td>{{$event->player_type}}</td>
-        <td> <div class="btn btn-danger">辞退する</div> </td>
-      </tr>
-      @endforeach
-    </table>
+    <div class="table-responsible">
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <th>レースID</th>
+            <th>種目</th>
+            <th>時間</th>
+            <th>記録</th>
+            <th>順位</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($entries as $entry)
+          <tr>
+            <td>{{$entry->race->id}}</td>
+            <td>{{$entry->race->event->event_name}}</td>
+            <td>{{$entry->race->start_time}}</td>
+            <td>{{$entry->record_time}}</td>
+            <td>{{$entry->rank}}</td>
+            <td>
+              <form action="{{ route('deleteEntry', ['entry_id' => $entry->id,]) }}" method="POST">
+                {{ csrf_field() }}
+                <input class="btn btn-danger" type="submit" value="辞退する">
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   </div>
 @endsection

@@ -12,24 +12,30 @@
       <span>{{$race->startTime}}-</span></h4>
       @if (!is_null($race->entries))
       <div class="container">
-        <table class="table table-dark">
-          <tr>
-            <th>レーン</th>
-            <th>氏名</th>
-            <th>年齢</th>
-            <th>記録</th>
-            <th>順位</th>
-          </tr>
-          @foreach ($race->entries as $entry)
-          <tr>
-            <td>1</td>
-            <td>{{optional($entry->player)->name}}</td>
-            <td>{{optional($entry->player)->age}}</td>
-            <td>{{$entry->record_time}}</td>
-            <td>{{$entry->rank}}</td>
-          </tr>
-          @endforeach
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>レーン</th>
+                <th>氏名</th>
+                <th>年齢</th>
+                <th>記録</th>
+                <th>順位</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($race->entries as $entry)
+              <tr>
+                <td>1</td>
+                <td>{{optional($entry->player)->name}}</td>
+                <td>{{optional($entry->player)->age}}</td>
+                <td>{{$entry->record_time}}</td>
+                <td>{{$entry->rank}}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
       @endif
     </div>

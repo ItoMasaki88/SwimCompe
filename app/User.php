@@ -93,15 +93,15 @@ class User extends Authenticatable
     */
     public function ageClassify() {
       $age = $this->attributes['age'];
-      if (6<=$age | $age<=12) {
+      if (6<=$age && $age<=12) {
         return array(1, );
-      } elseif (12<$age | $age<=15) {
+      } elseif (12<$age && $age<=15) {
         return array(2, );
-      } elseif (15<$age | $age<=18) {
+      } elseif (15<$age && $age<=18) {
         return array(3, );
-      } elseif (18<$age | $age<30) {
+      } elseif (18<$age && $age<30) {
         return array(4, );
-      } elseif (30<=$age | $age<50) {
+      } elseif (30<=$age && $age<50) {
         return array(4, 5,);
       } elseif (50<=$age) {
         return array(4, 5, 6,);
@@ -171,6 +171,16 @@ class User extends Authenticatable
     public function getEmailAttribute()
     {
       return $this->attributes['email'];
+    }
+    /**
+     * Get Admin
+     *
+     * @param
+     * @return string
+    **/
+    public function getAdminAttribute()
+    {
+      return $this->attributes['admin'];
     }
     /**
      * Get 年齢

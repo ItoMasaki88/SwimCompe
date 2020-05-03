@@ -18,10 +18,10 @@ class ShowMypage extends Controller
   {
     $entries = Auth::user()->entries;
 
-    $events = array();
-    foreach ($entries as $entry) {
-      array_push($events, $entry->race->event);
-    }
-    return view('app/mypage', ['events' => $events]);
+    // $events = array();
+    // foreach ($entries as $entry) {
+    //   array_push($events, $entry->race->event);
+    // }
+    return view('app/mypage', ['entries' => $entries]);
   }
 }
