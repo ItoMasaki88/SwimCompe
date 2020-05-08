@@ -5,7 +5,7 @@
   <h2>全データ一覧</h2>
   @foreach ($eventRecords as $eventRecord)
   <div class="container">
-    <h3> <span class="label label-default">{{ $eventRecord['eventName'] }}</span></h3>
+    <h3> <span class="label label-default">{{ $eventRecord['eventName'] }}</span> <small></small> </h3>
     @foreach ($eventRecord['raceRecords'] as $raceRecord)
     <div class="container">
       <h4> <span class="label label-primary">第{{ $raceRecord['No'] }}レース</span>

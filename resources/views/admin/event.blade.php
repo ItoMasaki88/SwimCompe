@@ -14,12 +14,12 @@
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('register') }}" method="POST">
+            <form action="{{ route('makeEvent') }}" method="POST">
               <!-- @csrf -->
               {{ csrf_field() }}
               <div class="form-group">
                 <label for="style">泳法</label>
-                <select class="form-control" id="age" name="age">
+                <select class="form-control" id="style" name="style">
                   <option selected>選択してください</option>
                   <option value="1">自由形</option>
                   <option value="2">平泳ぎ</option>
@@ -42,7 +42,7 @@
               </div>
               <div class="form-group">
                 <label for="age">距離</label>
-                <select class="form-control" id="age" name="age">
+                <select class="form-control" id="distance" name="distance">
                   <option selected>選択してください</option>
                   <option value="1">50m</option>
                   <option value="2">100m</option>
@@ -50,18 +50,52 @@
                 </select>
               </div>
               <div class="form-group">
-                <label class="control-label">性別</label>
-                    <div class="form-check">
-                      <input type="radio" value="male" class="custom-check-input" id="male" name="sex">
-                      <label class="custom-check-label" for="male">男性</label>
-                    </div>
-                    <div class="form-check">
-                      <input type="radio" value="female" class="custom-check-input" id="female" name="sex">
-                      <label class="custom-check-label" for="female">女性</label>
-                    </div>
+                <label for="sex">性別</label>
+                <select class="form-control" id="sex" name="sex">
+                  <option selected>選択してください</option>
+                  <option value="1">男子</option>
+                  <option value="2">女子</option>
+                  <option value="3">混合</option>
+                </select>
               </div>
+              <div class="form-group">
+                <label class="control-label">出場形態</label>
+                <div class="form-check">
+                  <input type="radio" value="True" class="custom-check-input" id="individual" name="entryType">
+                  <label class="custom-check-label" for="male">個人</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" value="False" class="custom-check-input" id="team" name="entryType">
+                  <label class="custom-check-label" for="female">団体</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="players">出場人数</label>
+                <select class="form-control" id="players" name="players">
+                  <option selected>選択してください</option>
+                  @for ($i=1; $i < 51; $i++)
+                  <option value="{{ $i }}">{{ $i }}人</option>
+                  @endfor
+                </select>
+              </div>
+              <label for="races">開始時間</label>
+              <div class="form-group">
+            		<label class="sr-only" for="date">日目</label>
+            		<input type="text" class="form-control" id="date" name="date">
+            	</div>
+              <span>日目</span>
+              <div class="form-group">
+            		<label class="sr-only" for="hour">時</label>
+            		<input type="text" class="form-control" id="hour" name="hour">
+            	</div>
+              <span>時</span>
+              <div class="form-group">
+            		<label class="sr-only" for="minute">分</label>
+            		<input type="text" class="form-control" id="minute" name="minute">
+            	</div>
+              <span>分</span>
               <div class="text-right">
-                <button type="submit" class="btn btn-primary">送信</button>
+                <button type="submit" class="btn btn-primary">作成</button>
               </div>
             </form>
           </div>

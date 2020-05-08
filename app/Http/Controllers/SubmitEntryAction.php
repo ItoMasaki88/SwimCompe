@@ -57,7 +57,7 @@ class SubmitEntryAction extends Controller
         ]);
 
         //**showMypage**//
-        return view('app/mypage', ['entries' => Auth::user()->entries,]);
+        return redirect('/mypage');
       }
 
 }
