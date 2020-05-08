@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
   <h2>全データ一覧</h2>
-  @foreach ($events as $event)
+  @foreach ($eventRecords as $eventRecord)
   <div class="container">
-    <h3> <span class="label label-default">{{ $event->event_name }}</span></h3>
-    @foreach ($event->races as $race)
+    <h3> <span class="label label-default">{{ $eventRecord['eventName'] }}</span></h3>
+    @foreach ($eventRecord['raceRecords'] as $raceRecord)
     <div class="container">
-      <h4> <span class="label label-primary">第{{ $race->number }}レース</span>
-      <span>{{$race->startTime}}-</span></h4>
-      @if (!is_null($race->entries))
+      <h4> <span class="label label-primary">第{{ $raceRecord['No'] }}レース</span>
+      <span>{{$raceRecord['startTime']}}-</span></h4>
+      @if (!is_null($raceRecord['entryRecords']))
       <div class="container">
         <div class="table-responsive">
           <table class="table">
@@ -24,13 +24,13 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($race->entries as $entry)
+              @foreach ($raceRecord['entryRecords'] as $entryRecord)
               <tr>
                 <td>1</td>
-                <td>{{optional($entry->player)->name}}</td>
-                <td>{{optional($entry->player)->age}}</td>
-                <td>{{$entry->record_time}}</td>
-                <td>{{$entry->rank}}</td>
+                <td>{{$entryRecord['playerName']}}</td>
+                <td>{{$entryRecord['age']}}</td>
+                <td>{{$entryRecord['recordTime']}}</td>
+                <td>{{$entryRecord['rank']}}</td>
               </tr>
               @endforeach
             </tbody>

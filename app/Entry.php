@@ -28,12 +28,12 @@ class Entry extends Model
   }
 
   /*
-  * エントリーする選手を取得
+  * エントリーする選手を取得 （注　機能せず！！）
   */
-   public function player()
-   {
-      return $this->belongsTo('App\User');
-   }
+   // public function player()
+   // {
+   //    return $this->belongsTo('App\User');
+   // }
   /*
   *=========リレーション処理ここまで==========================
    */
@@ -43,6 +43,36 @@ class Entry extends Model
     * Attribute 取得=============================================================
     *
    **/
+   /**
+    * Get ID
+    *
+    * @param
+    * @return int
+   **/
+   public function getIdAttribute()
+   {
+     return $this->attributes['id'];
+   }
+   /**
+    * Get User_ID
+    *
+    * @param
+    * @return int
+   **/
+   public function getUserIdAttribute()
+   {
+     return $this->attributes['user_id'];
+   }
+   /**
+    * Get Race_ID
+    *
+    * @param
+    * @return int
+   **/
+   public function getRaceIdAttribute()
+   {
+     return $this->attributes['race_id'];
+   }
    /**
     * Get record time
     *
@@ -68,16 +98,6 @@ class Entry extends Model
        return $this->attributes['rank'];
      }
      return '--';
-   }
-   /**
-    * Get ID
-    *
-    * @param
-    * @return int
-   **/
-   public function getIdAttribute()
-   {
-     return $this->attributes['id'];
    }
    /**
     * Attribute 取得　ここまで=============================================================
