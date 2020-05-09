@@ -53,7 +53,7 @@ class ResultController extends Controller
   }
 
   /**
-   * 結果タイム入力フォーム
+   * 結果登録処理
    *
    * @param
    * @return redirectTo(all)

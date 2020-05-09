@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <h2>全データ一覧</h2>
+  <h2>結果入力</h2>
   <div class="container">
     <h3><span class="label label-default">{{ $eventRecord['eventName'] }}</span></h3>
     <form class="form" action="{{ route('submitResult', ['eventId' => $eventRecord['eventId'],]) }}" method="POST">
@@ -17,11 +17,11 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>レーン</th>
-                    <th>氏名</th>
-                    <th>年齢</th>
-                    <th>記録</th>
-                    <th>順位</th>
+                    <th class="col-xs-1">レーン</th>
+                    <th class="col-xs-3">氏名</th>
+                    <th class="col-xs-2">年齢</th>
+                    <th class="col-xs-3">記録</th>
+                    <th class="col-xs-3">順位</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,17 +31,15 @@
                   <td>{{$entryRecord['playerName']}}</td>
                   <td>{{$entryRecord['age']}}</td>
                   <td>
-                  	<div class="form-group">
-                      <label class="sr-only" for="min[{{ $entryRecord['entryId'] }}]">分</label>
-                  		<input type="text" class="form-control" id="min[{{$entryRecord['entryId']}}]" name="min[{{$entryRecord['entryId']}}]">
-                      <span>分</span>
-                  		<label class="sr-only" for="sec[{{ $entryRecord['entryId'] }}]">秒</label>
-                  		<input type="text" class="form-control" id="sec[{{ $entryRecord['entryId'] }}]" name="sec[{{ $entryRecord['entryId'] }}]">
-                      <span>.</span>
-                  		<label class="sr-only" for="msec[{{ $entryRecord['entryId'] }}]">ミリ秒</label>
-                  		<input type="text" class="form-control" id="msec[{{ $entryRecord['entryId'] }}]" name="msec[{{ $entryRecord['entryId'] }}]">
-                      <span>秒</span>
-                  	</div>
+                    <label class="sr-only" for="min[{{ $entryRecord['entryId'] }}]">分</label>
+                    <input type="text" class="input-time" id="min[{{$entryRecord['entryId']}}]" name="min[{{$entryRecord['entryId']}}]">
+                    <span>分</span>
+                    <label class="sr-only" for="sec[{{ $entryRecord['entryId'] }}]">秒</label>
+                    <input type="text" class="input-time" id="sec[{{ $entryRecord['entryId'] }}]" name="sec[{{ $entryRecord['entryId'] }}]">
+                    <span>.</span>
+                    <label class="sr-only" for="msec[{{ $entryRecord['entryId'] }}]">ミリ秒</label>
+                    <input type="text" class="input-time" id="msec[{{ $entryRecord['entryId'] }}]" name="msec[{{ $entryRecord['entryId'] }}]">
+                    <span>秒</span>
                   </td>
                   <td>{{$entryRecord['rank']}}</td>
                 </tr>
@@ -53,7 +51,9 @@
         @endif
       </div>
       @endforeach
-      <input class="btn btn-primary" type="submit" value="送信">
+      <div class="col-xs-1 col-xs-offset-7">
+        <input class="btn btn-warning" type="submit" value="結果送信">
+      </div>
     </form>
   </div>
 </div>

@@ -24,11 +24,11 @@
           <table class="table">
             <thead>
               <tr>
-                <th>レーン</th>
-                <th>氏名</th>
-                <th>年齢</th>
-                <th>記録</th>
-                <th>順位</th>
+                <th class="col-xs-1">レーン</th>
+                <th class="col-xs-3">氏名</th>
+                <th class="col-xs-2">年齢</th>
+                <th class="col-xs-3">記録</th>
+                <th class="col-xs-3">順位</th>
               </tr>
             </thead>
             <tbody>
