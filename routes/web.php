@@ -22,8 +22,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::post('/deleteEntry', 'DeleteEntryAction')->name('deleteEntry');
 
   Route::get('/users', function () { return view('admin.users', ['users'=> App\User::all()]); });
-  // Route::get('/result', 'ResultController@input');
-  // Route::post('/result', 'ResultController@submit')->name('makeEvent');
+  Route::post('/resultForm', 'ResultController@input')->name('resultForm');
+  Route::post('/inputResult', 'ResultController@submit')->name('submitResult');
   Route::get('/event', function () { return view('admin.event'); });
   Route::post('/event', 'MakeEventAction')->name('makeEvent');
   Route::get('/all', 'ShowAll');

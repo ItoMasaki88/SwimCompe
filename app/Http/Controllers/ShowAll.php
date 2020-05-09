@@ -47,6 +47,7 @@ class ShowAll extends Controller
         }
 
         array_push($eventRecords, [
+          'eventId' => $event->id,
           'eventName' => $event->event_name,
           'raceRecords' => $raceRecords,
         ]);

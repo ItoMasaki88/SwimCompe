@@ -2,51 +2,59 @@
 
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="col col-md-offset-3 col-md-6">
-      <nav class="panel panel-default">
-        <div class="panel-heading">結果入力</div>
-        <div class="panel-body">
-          @if($errors->any())
-            <div class="alert alert-danger">
-              @foreach($errors->all() as $message)
-                <p>{{ $message }}</p>
-              @endforeach
-            </div>
-          @endif
-          <!-- @csrf -->
-          {{ csrf_field() }}
-          <h3>エントリー種目</h3>
-          <div class="table-responsive">
-            <table class="table table-light">
-              <thead>
+  <h2>全データ一覧</h2>
+  <div class="container">
+    <h3><span class="label label-default">{{ $eventRecord['eventName'] }}</span></h3>
+    <form class="form" action="{{ route('submitResult', ['eventId' => $eventRecord['eventId'],]) }}" method="POST">
+      {{ csrf_field() }}
+      @foreach ($eventRecord['raceRecords'] as $raceRecord)
+      <div class="container">
+        <h4> <span class="label label-primary">第{{ $raceRecord['No'] }}レース</span>
+          <span>{{$raceRecord['startTime']}}-</span></h4>
+          @if (!is_null($raceRecord['entryRecords']))
+          <div class="container">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>レーン</th>
+                    <th>氏名</th>
+                    <th>年齢</th>
+                    <th>記録</th>
+                    <th>順位</th>
+                  </tr>
+                </thead>
+                <tbody>
+                @foreach ($raceRecord['entryRecords'] as $entryRecord)
                 <tr>
-                  <th>ID</th>
-                  <th>種目名</th>
-                  <th>性別</th>
-                  <th>年齢区分</th>
-                  <th>出場形態</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($events as $event)
-                <tr>
-                  <td>{{$event->id}}</td>
-                  <td>{{$event->event_name}}</td>
-                  <td>{{$event->sex}}</td>
-                  <td>{{$event->age_division}}</td>
-                  <td>{{$event->player_type}}</td>
-                  <td> <div class="btn btn-danger">辞退する</div> </td>
+                  <td>1</td>
+                  <td>{{$entryRecord['playerName']}}</td>
+                  <td>{{$entryRecord['age']}}</td>
+                  <td>
+                  	<div class="form-group">
+                      <label class="sr-only" for="min[{{ $entryRecord['entryId'] }}]">分</label>
+                  		<input type="text" class="form-control" id="min[{{$entryRecord['entryId']}}]" name="min[{{$entryRecord['entryId']}}]">
+                      <span>分</span>
+                  		<label class="sr-only" for="sec[{{ $entryRecord['entryId'] }}]">秒</label>
+                  		<input type="text" class="form-control" id="sec[{{ $entryRecord['entryId'] }}]" name="sec[{{ $entryRecord['entryId'] }}]">
+                      <span>.</span>
+                  		<label class="sr-only" for="msec[{{ $entryRecord['entryId'] }}]">ミリ秒</label>
+                  		<input type="text" class="form-control" id="msec[{{ $entryRecord['entryId'] }}]" name="msec[{{ $entryRecord['entryId'] }}]">
+                      <span>秒</span>
+                  	</div>
+                  </td>
+                  <td>{{$entryRecord['rank']}}</td>
                 </tr>
                 @endforeach
               </tbody>
             </table>
           </div>
-
         </div>
-      </nav>
-    </div>
+        @endif
+      </div>
+      @endforeach
+      <input class="btn btn-primary" type="submit" value="送信">
+    </form>
   </div>
 </div>
 @endsection
