@@ -17,8 +17,8 @@ class CreateEntriesTable extends Migration
           $table->increments('id');
           $table->integer('user_id')->unsigned();
           $table->integer('race_id')->unsigned();
-          $table->timestamp('recordTime')->nullable();
-          $table->integer('rank')->nullable();
+          $table->float('recordTime')->nullable();
+          $table->integer('lane')->nullable();
           $table->timestamps();
 
           // 外部キーを設定する
