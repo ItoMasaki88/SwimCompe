@@ -63,12 +63,29 @@ class ResultController extends Controller
     foreach (Event::find($request->eventId)->races as $race) {
       foreach ($race->entries as $entry) {
         $id = $entry->id;
-        Entry::find($id)->update([
-          'recordTime' =>
-            $request->min[$id] *60
-            + $request->sec[$id]
-            + $request->msec[$id] *0.01
-        ]);
+
+        if (isset($request->min[$id])) {
+          $min = (float) $request->min[$id];
+        } else {
+          $min = 0;
+        }
+        if (isset($request->sec[$id])) {
+          $sec = (float) $request->sec[$id];
+        } else {
+          $sec = 0;
+        }
+        if (isset($request->msec[$id])) {
+          $msec = (float) $request->msec[$id];
+        } else {
+          $msec = 0;
+        }
+
+        if ($min+$sec+$msec != 0) {
+          $ent = Entry::find($id);
+          $ent->recordTime = $min*60 + $sec + $msec*0.01;
+          $ent->save();
+        }
+
       }
     }
 

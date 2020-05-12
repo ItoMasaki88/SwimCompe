@@ -18,6 +18,7 @@
       @if(Auth::user()->admin == 1)
       <li><a class="my-navbar-item" href="/all">全データ</a></li>
       <li><a class="my-navbar-item" href="/event">種目登録</a></li>
+      <li><a class="my-navbar-item" href="/user">ユーザー一覧</a></li>
       @endif
       @endif
     </ul>

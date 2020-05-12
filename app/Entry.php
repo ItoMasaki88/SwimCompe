@@ -81,10 +81,42 @@ class Entry extends Model
    **/
    public function getRecordTimeAttribute()
    {
-     if (!is_null($this->attributes['recordTime'])) {
-       return $this->attributes['recordTime'];
+     if (is_null($this->attributes['recordTime'])) {
+       return '--';
      }
-     return '--';
+     return $this->attributes['recordTime'];
+   }
+   /**
+    * Get record time
+    *
+    * @param
+    * @return string
+   **/
+   public function getRecordTimeTextedAttribute()
+   {
+     if (is_null($this->attributes['recordTime'])) {
+       return '--';
+     }
+     $record = $this->attributes['recordTime'];
+
+     $min = floor($record /60);
+     $sec = $record - $min*1;
+
+     if ($min == 0) return $sec . '秒';
+     else return $min . '分' . $sec . '秒';
+   }
+   /**
+    * Get lane
+    *
+    * @param
+    * @return int
+   **/
+   public function getLaneAttribute()
+   {
+     if (is_null($this->attributes['lane'])) {
+       return '--';
+     }
+     return $this->attributes['recordTime'];
    }
    /**
     * Get rank
@@ -94,10 +126,25 @@ class Entry extends Model
    **/
    public function getRankAttribute()
    {
-     if (!is_null($this->attributes['rank'])) {
-       return $this->attributes['rank'];
+     if ( is_null($this->attributes['recordTime']) ) {
+       return '--';
      }
-     return '--';
+
+     $records = [];
+     foreach ($this->race->event->races as $race) {
+       foreach ($race->entries as $entry) {
+         $recordTime = $entry->getRecordTimeAttribute();
+
+         if ($recordTime != '--') {
+           \array_push($records, $recordTime);
+         }
+       }
+     }
+
+     \sort($records);
+     $rank = \array_search( $this->getRecordTimeAttribute(), $records );
+
+     return $rank + 1;
    }
    /**
     * Attribute 取得　ここまで=============================================================
@@ -144,6 +191,5 @@ class Entry extends Model
    }
    /**バリデーションここまで=================================================
     */
-
 
 }

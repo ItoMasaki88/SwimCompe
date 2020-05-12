@@ -34,7 +34,7 @@ class ShowAll extends Controller
             array_push($entryRecords, [
               'playerName' => $player->name,
               'age' => $player->age,
-              'recordTime' => $entry->record_time,
+              'recordTime' => $entry->record_time_texted,
               'rank' => $entry->rank,
             ]);
           }
