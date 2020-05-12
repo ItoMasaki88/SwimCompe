@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use App\Event;
-use App\Entry;
+use App\Race;
 use Carbon\Carbon;
 
 class EditRacesController extends Controller
@@ -19,23 +18,30 @@ class EditRacesController extends Controller
      */
     public function input(Request $request)
     {
-      $event = Event::find($request->eventId);
 
-      $raceRecords = [];
-      foreach ($event->races as $race) {
-        array_push($raceRecords, [
-          'No' => $race->number,
-          'startTime' => $race->startTime,
+      $events = Event::all();
+
+      $eventRecords = [];
+      foreach ($events as $event) {
+
+        $raceRecords = [];
+        foreach ($event->races as $race) {
+          array_push($raceRecords, [
+            'No' => $race->number,
+            'startTime' => $race->start_time_texted,
+            'raceId' => $race->id,
+          ]);
+        }
+
+        array_push($eventRecords, [
+          'eventId' => $event->id,
+          'eventName' => $event->event_name,
+          'raceRecords' => $raceRecords,
         ]);
       }
 
-      $eventRecord = [
-        'eventId' => $event->id,
-        'eventName' => $event->event_name,
-        'raceRecords' => $raceRecords,
-      ];
+      return view('admin.raceEditForm', ['eventRecords' => $eventRecords]);
 
-      return view('admin.resultForm', ['eventRecord' => $eventRecord]);
     }
 
     /**
@@ -46,32 +52,24 @@ class EditRacesController extends Controller
      */
     public function submit(Request $request)
     {
-      foreach (Event::find($request->eventId)->races as $race) {
-        foreach ($race->entries as $entry) {
-          $id = $entry->id;
+      foreach (Event::all() as $event) {
+        foreach ($event->races as $race) {
+          $id = $race->id;
 
-          if (isset($request->min[$id])) {
-            $min = (float) $request->min[$id];
-          } else {
-            $min = 0;
-          }
-          if (isset($request->sec[$id])) {
-            $sec = (float) $request->sec[$id];
-          } else {
-            $sec = 0;
-          }
-          if (isset($request->msec[$id])) {
-            $msec = (float) $request->msec[$id];
-          } else {
-            $msec = 0;
-          }
+          if (
+            isset($request->day[$id])
+            && isset($request->hour[$id])
+            && isset($request->min[$id])
+          ) {
+            $initial = new Carbon('2020-08-10');
+            $initial->addDay($request->day[$id]-1);
+            $initial->addHour($request->hour[$id]);
+            $initial->addMinute($request->min[$id]);
 
-          if ($min+$sec+$msec != 0) {
-            $ent = Entry::find($id);
-            $ent->recordTime = $min*60 + $sec + $msec*0.01;
+            $ent = Race::find($id);
+            $ent->startTime = $initial;
             $ent->save();
           }
-
         }
       }
 

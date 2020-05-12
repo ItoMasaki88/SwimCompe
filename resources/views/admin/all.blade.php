@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
   <h2>全データ一覧</h2>
+  <a class="btn btn-default" href="{{ route('raceForm') }}" role="button">レース編集</a>
   @foreach ($eventRecords as $eventRecord)
   <div class="container">
     <h3>

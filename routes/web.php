@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/users', function () { return view('admin.users', ['users'=> App\User::all()]); });
   Route::post('/resultForm', 'ResultController@input')->name('resultForm');
   Route::post('/inputResult', 'ResultController@submit')->name('submitResult');
+  Route::get('/raceEditForm', 'EditRacesController@input')->name('raceForm');
+  Route::post('/editRace', 'EditRacesController@submit')->name('editRace');
   Route::get('/event', function () { return view('admin.event'); });
   Route::post('/event', 'MakeEventAction')->name('makeEvent');
   Route::get('/all', 'ShowAll');

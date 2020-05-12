@@ -41,7 +41,7 @@ class ShowAll extends Controller
 
           array_push($raceRecords, [
             'No' => $race->number,
-            'startTime' => $race->startTime,
+            'startTime' => $race->start_time_texted,
             'entryRecords' => $entryRecords,
           ]);
         }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Race extends Model
 {
@@ -53,6 +54,18 @@ class Race extends Model
   public function getStartTimeAttribute()
   {
     return $this->attributes['startTime'];
+  }
+  /**
+   * Get start Time yyyy/mm/dd hh:mm
+   *
+   * @param
+   * @return int
+  **/
+  public function getStartTimeTextedAttribute()
+  {
+    $time = new Carbon( $this->attributes['startTime'] );
+    return $time->year . '/' . $time->month . '/' . $time->day
+          . ' ' . $time->hour . ':' . $time->minute;
   }
   /**
    * Get event ID

@@ -32,13 +32,13 @@
                   <td>{{$entryRecord['age']}}</td>
                   <td>
                     <label class="sr-only" for="min[{{ $entryRecord['entryId'] }}]">分</label>
-                    <input type="text" class="input-time" id="min[{{$entryRecord['entryId']}}]" name="min[{{$entryRecord['entryId']}}]">
+                    <input type="int" class="input-time" id="min[{{$entryRecord['entryId']}}]" name="min[{{$entryRecord['entryId']}}]">
                     <span>分</span>
                     <label class="sr-only" for="sec[{{ $entryRecord['entryId'] }}]">秒</label>
-                    <input type="text" class="input-time" id="sec[{{ $entryRecord['entryId'] }}]" name="sec[{{ $entryRecord['entryId'] }}]">
+                    <input type="int" class="input-time" id="sec[{{ $entryRecord['entryId'] }}]" name="sec[{{ $entryRecord['entryId'] }}]">
                     <span>.</span>
                     <label class="sr-only" for="msec[{{ $entryRecord['entryId'] }}]">ミリ秒</label>
-                    <input type="text" class="input-time" id="msec[{{ $entryRecord['entryId'] }}]" name="msec[{{ $entryRecord['entryId'] }}]">
+                    <input type="int" class="input-time" id="msec[{{ $entryRecord['entryId'] }}]" name="msec[{{ $entryRecord['entryId'] }}]">
                     <span>秒</span>
                   </td>
                   <td>{{$entryRecord['rank']}}</td>
