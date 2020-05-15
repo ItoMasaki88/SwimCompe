@@ -41,7 +41,6 @@ class EditRacesController extends Controller
       }
 
       return view('admin.raceEditForm', ['eventRecords' => $eventRecords]);
-
     }
 
     /**

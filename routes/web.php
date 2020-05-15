@@ -16,11 +16,17 @@ Route::get('/', function () { return view('app/index'); } )->name('index');
 
 Route::get('/entry', 'ShowEventsList');
 
+Route::get('/mailable/send', 'SendResetMailAction');
+Route::get('/mailable/sendReset', function () { return view('auth.sendReset'); })->name('sendReset');
+Route::post('/mailable/resetMail', 'SendResetMailAction')->name('resetMail');
+Route::get('/mailable/mailSent', function () { return view('auth.mailSent'); })->name('mailSent');
+
+Route::get('/mailable/resetForm', function () { return view('auth.resetForm'); })->name('resetForm');
+
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', 'ShowMypage');
   Route::post('/submitEntry', 'SubmitEntryAction')->name('submitEntry');
   Route::post('/deleteEntry', 'DeleteEntryAction')->name('deleteEntry');
-
   Route::get('/users', function () { return view('admin.users', ['users'=> App\User::all()]); });
   Route::post('/resultForm', 'ResultController@input')->name('resultForm');
   Route::post('/inputResult', 'ResultController@submit')->name('submitResult');
@@ -32,3 +38,9 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Auth::routes();
+
+
+// 送信メール本文のプレビュー
+Route::get('/mailable/preview', function () {
+  return new App\Mail\PasswordResetMail();
+});
