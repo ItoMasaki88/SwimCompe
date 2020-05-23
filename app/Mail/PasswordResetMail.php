@@ -11,16 +11,15 @@ class PasswordResetMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $title;
-    protected $text;
+    private $token;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        $this->title = \sprintf('パスワード再設定通知');
+        $this->token = $token;
     }
 
     /**
@@ -30,7 +29,7 @@ class PasswordResetMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.passwordResetMail')
-                    ->subject($this->title);
+        return $this->view('mail.password-reset', ['token' => $this->token])
+                    ->subject('パスワード再設定通知');
     }
 }

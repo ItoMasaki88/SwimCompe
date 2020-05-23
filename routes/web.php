@@ -16,13 +16,6 @@ Route::get('/', function () { return view('app/index'); } )->name('index');
 
 Route::get('/entry', 'ShowEventsList');
 
-Route::get('/mailable/send', 'SendResetMailAction');
-Route::get('/mailable/sendReset', function () { return view('auth.sendReset'); })->name('sendReset');
-Route::post('/mailable/resetMail', 'SendResetMailAction')->name('resetMail');
-Route::get('/mailable/mailSent', function () { return view('auth.mailSent'); })->name('mailSent');
-
-Route::get('/mailable/resetForm', function () { return view('auth.resetForm'); })->name('resetForm');
-
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/mypage', 'ShowMypage');
   Route::post('/submitEntry', 'SubmitEntryAction')->name('submitEntry');
@@ -38,6 +31,7 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Auth::routes();
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 
 // 送信メール本文のプレビュー

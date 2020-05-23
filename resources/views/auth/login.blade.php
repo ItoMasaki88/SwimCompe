@@ -32,7 +32,7 @@
           </div>
         </nav>
         <div class="text-center">
-          <a href="{{ route('sendReset') }}">パスワードをおわすれですか？（パスワードリセットへ）</a>
+          <a href="{{ route('password.request') }}">パスワードをおわすれですか？（パスワードリセットへ）</a>
         </div>
       </div>
     </div>
